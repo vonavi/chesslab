@@ -48,9 +48,8 @@ module ChessLab
         end
       end
 
-      # Update the players' data after game import.
-      # Here, `player[1]` is the player himself
-      @players.each { |player| player[1].update }
+      # Update the players' data after game import
+      @players.each { |name, player| player.update }
     end
 
   end
