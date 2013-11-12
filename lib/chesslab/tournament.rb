@@ -1,5 +1,5 @@
 module ChessLab
-  class Tourney
+  class Tournament
 
     # Provide the access to the player by his name
     attr_reader :players
@@ -10,8 +10,8 @@ module ChessLab
       @dir = config['dir']
       @title = config['title']
 
-      # Register tourney
-      ChessLab.tourneys[@dir] = self
+      # Register tournament
+      ChessLab.tournaments[@dir] = self
 
       players_file = File.join(Dir.pwd, "#{@dir}/players.yml")
       @players_conf = YAML.load_file players_file
