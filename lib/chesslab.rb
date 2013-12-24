@@ -1,8 +1,12 @@
 $:.unshift File.dirname(__FILE__) # for use/testing when no gem is installed
 
+# 3rd party
+require 'active_hash'
+
 # Internal requires
-require 'chesslab/player.rb'
-require 'chesslab/tournament.rb'
+require_relative 'chesslab/game.rb'
+require_relative 'chesslab/player.rb'
+require_relative 'chesslab/tournament.rb'
 
 module ChessLab
 

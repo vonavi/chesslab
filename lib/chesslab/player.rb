@@ -1,8 +1,9 @@
 module ChessLab
-  class Player
+  class Player < ActiveYaml::Base
 
-    # Player's name, number and Elo rating
-    attr_reader :name, :number, :elo
+    # Player's name and Elo rating, stored in file
+    field :name
+    field :elo, :default => 1500
 
     # If the player wins, makes a draw or losses, the opponent is
     # stored in the corresponding list
@@ -11,15 +12,9 @@ module ChessLab
     # The number of games played by the player and his score
     attr_reader :games, :score
 
-    def initialize config, trn_dir
-      @name = config['name']
-      @number = config['number']
-      @elo = config['elo'] || 1200
-      @trn_dir = trn_dir
-
-      @wins = []
-      @draws = []
-      @losses = []
+    def initialize *args, &blk
+      super
+      @wins, @draws, @losses = [], [], []
       @games = 0
       @score = 0.0
     end
