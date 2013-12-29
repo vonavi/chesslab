@@ -8,7 +8,7 @@ require_relative 'chesslab/game.rb'
 require_relative 'chesslab/player.rb'
 require_relative 'chesslab/tournament.rb'
 
-module ChessLab
+module Chesslab
 
   @tournaments = {}
 

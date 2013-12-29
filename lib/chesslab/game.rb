@@ -1,4 +1,4 @@
-module ChessLab
+module Chesslab
   class Game < ActiveYaml::Base
 
     # The tour number and date of game

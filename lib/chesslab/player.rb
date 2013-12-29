@@ -1,4 +1,4 @@
-module ChessLab
+module Chesslab
   class Player < ActiveYaml::Base
 
     # Player's name and Elo rating, stored in file
@@ -26,7 +26,7 @@ module ChessLab
 
     # Player's Sonneborn-Berger score
     def berger
-      players = ChessLab.tournaments[@trn_dir].players
+      players = Chesslab.tournaments[@trn_dir].players
 
       @wins.inject(0.0) { |sum, name| sum + players[name].score } +
         0.5 * @draws.inject(0.0) { |sum, name| sum + players[name].score }

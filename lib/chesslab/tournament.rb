@@ -1,4 +1,4 @@
-module ChessLab
+module Chesslab
   class Tournament
 
     def initialize config
@@ -6,7 +6,7 @@ module ChessLab
       @title = config['title']
 
       # Register tournament
-      ChessLab.tournaments[@dir] = self
+      Chesslab.tournaments[@dir] = self
 
       # Set the default file location
       ActiveFile::Base.set_root_path File.join(Dir.pwd, @dir)
