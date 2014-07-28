@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), '../lib')
+
+require 'chesslab'
+require 'mercenary'
+
+Mercenary.program(:chesslab) do |p|
+  p.version Chesslab::VERSION
+  p.description 'Chesslab processes documentation that accompanies chess tournaments.'
+  p.syntax 'chesslab <subcommand> [options]'
+
+  p.command(:table) do |c|
+    c.syntax 'table' # do not include the program name or super commands
+    c.description 'Creates tournament tables'
+    c.option 'html', '--html', 'Generate the output in HTML format'
+
+    c.action do |args, options|
+      Chesslab::Commands::Table.generate args, {:html => options['html']}
+    end
+  end
+end
