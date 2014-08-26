@@ -24,12 +24,11 @@ module Chesslab
       @score = 1.0 * @wins.size + 0.5 * @draws.size
     end
 
+    def place
+    end
+
     # Player's Sonneborn-Berger score
     def berger
-      players = Chesslab.tournaments[@trn_dir].players
-
-      @wins.inject(0.0) { |sum, name| sum + players[name].score } +
-        0.5 * @draws.inject(0.0) { |sum, name| sum + players[name].score }
     end
 
   end

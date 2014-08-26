@@ -26,12 +26,7 @@ module Chesslab
 
   VERSION = '0.1'
 
-  @tournaments = {}
-
   class << self
-
-    # Provide the access to the tournament by its directory
-    attr_accessor :tournaments
 
     def configuration
       require 'yaml'
@@ -39,6 +34,10 @@ module Chesslab
       config_file = File.join(Dir.pwd, 'config.yml')
       config = YAML.load_file config_file
       config
+    end
+
+    def get_binding
+      binding
     end
 
   end
