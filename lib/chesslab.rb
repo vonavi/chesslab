@@ -23,22 +23,19 @@ require 'chesslab/tournament'
 require_all 'chesslab/commands'
 
 module Chesslab
+  extend self
 
   VERSION = '0.1'
 
-  class << self
-
-    def configuration
-      require 'yaml'
-
-      config_file = File.join(Dir.pwd, 'config.yml')
-      config = YAML.load_file config_file
-      config
-    end
-
-    def get_binding
-      binding
-    end
-
+  def configuration
+    require 'yaml'
+    config_file = File.join(Dir.pwd, 'config.yml')
+    config      = YAML.load_file config_file
+    config
   end
+
+  def get_binding
+    binding
+  end
+
 end
