@@ -4,6 +4,10 @@ module Chesslab
 
       attr_reader :title, :path, :rounds
 
+      def players
+        @players ||= Player.all
+      end
+
       def process
         setup
         process_games
@@ -40,6 +44,8 @@ module Chesslab
 
         # Update the players' data after game import
         Player.all.each { |player| player.process }
+        # Sort players by their tournament ranking
+        @players = players.sort
       end
 
     end

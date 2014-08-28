@@ -24,13 +24,27 @@ module Chesslab
       @points = 1.0 * @wins.size + 0.5 * @draws.size
     end
 
-    def place
-    end
-
     # Player's Sonneborn-Berger score
     def berger
       @wins.map { |id| Player.find_by_id(id).points }.reduce(0.0, :+) +
         0.5 * @draws.map { |id| Player.find_by_id(id).points }.reduce(0.0, :+)
+    end
+
+    def <=> other
+      # Ranking by points
+      cmp = other.points <=> self.points
+      return cmp if cmp != 0
+
+      # Ranking by the Sonneborn-Berger score
+      cmp = other.berger <=> self.berger
+      return cmp if cmp != 0
+
+      # Ranking by direct encounter(s) between the players
+      encounters   = Game.find_all_by_players Set.new([self.id, other.id])
+      scores       = encounters.map { |game| game.score self.id }.reduce(0.0, :+)
+      other_scores = encounters.map { |game| game.score other.id }.reduce(0.0, :+)
+      cmp          = other_scores <=> scores
+      return cmp
     end
 
   end
