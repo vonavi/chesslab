@@ -21,6 +21,20 @@ module Chesslab
     end
 
     def score ply_id
+      white_id = Player.find_by_name(white).id
+      black_id = Player.find_by_name(black).id
+
+      case
+      when ((result == '1-0' && ply_id == white_id) ^
+            (result == '0-1' && ply_id == black_id))
+        1.0
+      when (result == '1/2' &&
+            (ply_id == white_id || ply_id == black_id))
+        0.5
+      when ((result == '0-1' && ply_id == white_id) ^
+            (result == '1-0' && ply_id == black_id))
+        0.0
+      end
     end
 
   end

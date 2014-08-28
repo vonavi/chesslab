@@ -9,19 +9,19 @@ module Chesslab
     # stored in the corresponding list
     attr_accessor :wins, :draws, :losses
 
-    # The number of games played by the player and his score
-    attr_reader :games, :score
+    # The number of games played by the player and his points
+    attr_reader :games, :points
 
     def initialize *args, &blk
       super
       @wins, @draws, @losses = [], [], []
       @games = 0
-      @score = 0.0
+      @points = 0.0
     end
 
-    def update
+    def process
       @games = @wins.size + @draws.size + @losses.size
-      @score = 1.0 * @wins.size + 0.5 * @draws.size
+      @points = 1.0 * @wins.size + 0.5 * @draws.size
     end
 
     def place
@@ -29,6 +29,8 @@ module Chesslab
 
     # Player's Sonneborn-Berger score
     def berger
+      @wins.map { |id| Player.find_by_id(id).points }.reduce(0.0, :+) +
+        0.5 * @draws.map { |id| Player.find_by_id(id).points }.reduce(0.0, :+)
     end
 
   end

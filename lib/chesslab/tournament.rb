@@ -26,20 +26,20 @@ module Chesslab
           result = game.result
 
           case result
-          when '1:0'
+          when '1-0'
             white.wins << black.id
             black.losses << white.id
-          when '0.5:0.5'
+          when '1/2'
             white.draws << black.id
             black.draws << white.id
-          when '0:1'
+          when '0-1'
             white.losses << black.id
             black.wins << white.id
           end
         end
 
         # Update the players' data after game import
-        Player.all.each { |player| player.update }
+        Player.all.each { |player| player.process }
       end
 
     end

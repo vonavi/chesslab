@@ -2,14 +2,14 @@
   <caption><strong>Таблица результатов</strong></caption>
   <thead>
     <tr>
-      <th class="number">№</th>
-      <th class="player">Участник</th>
+      <th class="player">№</th>
+      <th class="name">Участник</th>
       <th class="elo">elo*</th>
       <%- Player.all.each do |player| -%>
       <th class="score" colspan="<%= Tournament.rounds %>"><%= player.id %></th>
       <%- end -%>
       <th class="games">Игры</th>
-      <th class="total">Очки</th>
+      <th class="points">Очки</th>
       <th class="place">Место</th>
       <th class="berger">Бергер</th>
     </tr>
@@ -22,8 +22,8 @@
   <tbody>
     <%- Player.all.each do |player| -%>
     <tr class="place-<%= player.place %>">
-      <td class="number"><%= player.id %></td>
-      <td class="player"><strong><%= player.name %></strong></td>
+      <td class="player"><%= player.id %></td>
+      <td class="name"><strong><%= player.name %></strong></td>
       <td class="elo"><%= player.elo %></td>
       <%- Player.all.each do |opponent| -%>
         <%- unless player.id == opponent.id -%>
@@ -38,7 +38,7 @@
         <%- end -%>
       <%- end -%>
       <td class="games"><%= player.games %></td>
-      <td class="total"><%= player.score %></td>
+      <td class="points"><%= player.points %></td>
       <td class="place"><%= player.place %></td>
       <td class="berger"><%= player.berger %></td>
     </tr>
