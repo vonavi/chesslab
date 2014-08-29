@@ -38,7 +38,7 @@
       <%- end -%>
       <td class="games"><%= player.games %></td>
       <td class="points"><%= Utils.symbolize_frac player.points %></td>
-      <td class="berger"><%= player.berger %></td>
+      <td class="berger"><%= Utils.symbolize_frac player.berger %></td>
     </tr>
     <%- end -%>
   </tbody>
