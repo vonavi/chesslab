@@ -28,7 +28,7 @@
         <%- unless place == index -%>
           <%- games = Game.find_all_by_players Set.new([player.id, opponent.id]) -%>
           <%- games.each do |game| -%>
-      <td class="score"><%= game.score player.id %></td>
+      <td class="score"><%= Utils.symbolize_frac(game.score player.id) %></td>
           <%- end -%>
         <%- else -%>
           <%- Tournament.rounds.times do |round| -%>
@@ -37,7 +37,7 @@
         <%- end -%>
       <%- end -%>
       <td class="games"><%= player.games %></td>
-      <td class="points"><%= player.points %></td>
+      <td class="points"><%= Utils.symbolize_frac player.points %></td>
       <td class="berger"><%= player.berger %></td>
     </tr>
     <%- end -%>
