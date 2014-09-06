@@ -1,7 +1,7 @@
 require 'set'
 
 module Chesslab
-  class Game < ActiveYaml::Base
+  class Game < Chesslab::LoadHash
 
     # Tournament round
     field :round, :default => 1

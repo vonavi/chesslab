@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'active_hash', '~> 1.2'
+gem 'inifile', '~> 3.0'
 gem 'mercenary', '~> 0.3.4'
 
 group :development do

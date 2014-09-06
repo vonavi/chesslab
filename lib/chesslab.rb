@@ -14,11 +14,14 @@ end
 
 # 3rd party
 require 'active_hash'
+require 'inifile'
 
 # Internal requires
-require 'chesslab/game'
-require 'chesslab/player'
+require 'chesslab/load_hash'
 require 'chesslab/tournament'
+require 'chesslab/player'
+require 'chesslab/game'
+require 'chesslab/utils'
 
 require_all 'chesslab/commands'
 

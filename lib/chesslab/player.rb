@@ -1,5 +1,5 @@
 module Chesslab
-  class Player < ActiveYaml::Base
+  class Player < Chesslab::LoadHash
 
     # Player's name and Elo rating, stored in file
     field :name
@@ -41,8 +41,10 @@ module Chesslab
 
       # Ranking by direct encounter(s) between the players
       encounters   = Game.find_all_by_players Set.new([self.id, other.id])
-      scores       = encounters.map { |game| game.score self.id }.reduce(0.0, :+)
-      other_scores = encounters.map { |game| game.score other.id }.reduce(0.0, :+)
+      scores       = encounters.map { |game| game.score self.id }
+                       .compact.reduce(0.0, :+)
+      other_scores = encounters.map { |game| game.score other.id }
+                       .compact.reduce(0.0, :+)
       cmp          = other_scores <=> scores
       return cmp
     end
