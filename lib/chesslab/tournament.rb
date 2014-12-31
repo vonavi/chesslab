@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Chesslab
   module Tournament
     extend self
@@ -14,6 +15,14 @@ module Chesslab
     end
 
     def setup
+      @res_to_meth = {
+        '1' => :wins,
+        '½' => :draws,
+        '0' => :losses,
+        '+' => :pluses,
+        '-' => :minuses
+      }
+
       config  = Chesslab.configuration['tournament'].first
       @title  = config['title']
       @path   = config['path']
@@ -25,21 +34,15 @@ module Chesslab
 
     def process_games
       Game.all.each do |game|
-        white = Player.find_by_name game.white
-        black = Player.find_by_name game.black
+        white  = Player.find_by_name game.white
+        black  = Player.find_by_name game.black
         result = game.result
 
-        case result
-        when '1-0'
-          white.wins << black.id
-          black.losses << white.id
-        when '1/2'
-          white.draws << black.id
-          black.draws << white.id
-        when '0-1'
-          white.losses << black.id
-          black.wins << white.id
-        end
+        next if result.nil?
+        meth = white.method @res_to_meth[result[0]]
+        meth.call << black.id
+        meth = black.method @res_to_meth[result[2]]
+        meth.call << white.id
       end
 
       # Update the players' data after game import

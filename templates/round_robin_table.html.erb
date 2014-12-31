@@ -1,5 +1,5 @@
 <table class="table tournament tablesorter">
-  <caption><strong>Таблица результатов</strong></caption>
+  <caption>Таблица результатов</caption>
   <thead>
     <tr>
       <th class="player">№</th>
@@ -22,13 +22,13 @@
     <%- Tournament.players.each_with_index do |player, place| -%>
     <tr>
       <td class="player"><%= place + 1 %></td>
-      <td class="name"><strong><%= player.name %></strong></td>
+      <td class="name"><%= player.name %></td>
       <td class="elo"><%= player.elo %></td>
       <%- Tournament.players.each_with_index do |opponent, index| -%>
         <%- unless place == index -%>
           <%- games = Game.find_all_by_players Set.new([player.id, opponent.id]) -%>
           <%- games.each do |game| -%>
-      <td class="score"><%= Utils.symbolize_frac(game.score player.id) %></td>
+      <td class="score"><%= game.show_result player.id %></td>
           <%- end -%>
         <%- else -%>
           <%- Tournament.rounds.times do |round| -%>
