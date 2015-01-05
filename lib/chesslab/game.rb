@@ -30,14 +30,6 @@ module Chesslab
       end
     end
 
-    def show_result ply_id
-      result = result_by_id ply_id
-      result = '–' if result == '-'
-      result
-    end
-
-    private
-
     def result_by_id ply_id
       case ply_id
       when Player.find_by_name(white).id

@@ -1,3 +1,4 @@
+# coding: utf-8
 module Chesslab
   class Player < Chesslab::LoadHash
 
@@ -12,6 +13,13 @@ module Chesslab
     # The number of games played by the player and his points
     attr_reader :games, :points
 
+    @@res_to_meth = {
+      '1' => :wins,
+      '½' => :draws,
+      '0' => :losses,
+      '+' => :pluses,
+      '−' => :minuses
+    }
     @@players_less_half = []
 
     def initialize *args, &blk
@@ -19,6 +27,11 @@ module Chesslab
       @wins, @draws, @losses = [], [], []
       @pluses, @minuses      = [], []
       @games, @points        = 0, 0.0
+    end
+
+    def add_result result, opponent
+      meth = self.method @@res_to_meth[result]
+      meth.call << opponent.id
     end
 
     # Less than 50% of games were played

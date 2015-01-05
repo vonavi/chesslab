@@ -6,7 +6,7 @@
       <th class="name">Участник</th>
       <th class="elo">elo*</th>
       <%- Player.count.times do |place| -%>
-      <th class="score" colspan="<%= Tournament.rounds %>"><%= place + 1 %></th>
+      <th class="result" colspan="<%= Tournament.rounds %>"><%= place + 1 %></th>
       <%- end -%>
       <th class="games">Игры</th>
       <th class="points">Очки</th>
@@ -28,7 +28,7 @@
         <%- unless place == index -%>
           <%- games = Game.find_all_by_players Set.new([player.id, opponent.id]) -%>
           <%- games.each do |game| -%>
-      <td class="score"><%= game.show_result player.id %></td>
+      <td class="result"><%= game.result_by_id player.id %></td>
           <%- end -%>
         <%- else -%>
           <%- Tournament.rounds.times do |round| -%>
