@@ -31,6 +31,8 @@ module Chesslab
     end
 
     def result_by_id ply_id
+      return '' unless result?
+
       case ply_id
       when Player.find_by_name(white).id
         result[0]
