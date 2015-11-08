@@ -9,9 +9,10 @@ module Chesslab
     # Store a player's opponent in a list corresponding to a result
     # that the player has against him
     attr_accessor :wins, :draws, :losses, :pluses, :minuses
-
-    # The number of games played by the player and his points
+    # Number of games played by the player and his points
     attr_reader :games, :points
+    # Player's place in the tournament
+    attr_accessor :place
 
     @@res_to_meth = {
       '1' => :wins,

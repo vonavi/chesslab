@@ -8,6 +8,10 @@ module Chesslab
       @players ||= Player.all
     end
 
+    def games
+      @games ||= Game.all
+    end
+
     def process
       setup
       process_games
@@ -39,7 +43,19 @@ module Chesslab
       Player.all.each { |player| player.process }
       # Sort players by their tournament ranking
       @players = players.sort
+
+      # Sort games for tournament table
+      @players.each_with_index do |player, place|
+        player.place = place
+      end
+      @games = games.sort
     end
 
+    # Get scores which the player collected in games with this opponent
+    def get_scores player, opponent
+      fst_place, snd_place = *[player.place, opponent.place].sort
+      idx = (fst_place + snd_place * (snd_place - 1) / 2) * @rounds
+      return @games[idx, @rounds].map { |game| game.result_by_id player.id }
+    end
   end
 end
