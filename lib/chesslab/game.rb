@@ -1,6 +1,4 @@
 # coding: utf-8
-require 'set'
-
 module Chesslab
   class Game < Chesslab::LoadHash
 
@@ -17,7 +15,7 @@ module Chesslab
       super
       white_ply    = Player.find_by_name white
       black_ply    = Player.find_by_name black
-      self.players = Set.new [white_ply.id, black_ply.id]
+      self.players = [white_ply.id, black_ply.id]
     end
 
     def score ply_id
@@ -43,9 +41,9 @@ module Chesslab
     # Sort games in the same order as cells below the diagonal of
     # tournament table
     def <=> other
-      high_place, low_place = *Player.find(self.players.to_a)
+      high_place, low_place = *Player.find(self.players)
                                 .map { |ply| ply.place }.sort
-      high_other, low_other = *Player.find(other.players.to_a)
+      high_other, low_other = *Player.find(other.players)
                                 .map { |ply| ply.place }.sort
       cmp = low_place <=> low_other
       return cmp if cmp != 0
