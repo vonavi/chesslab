@@ -17,12 +17,12 @@ module Chesslab
 
       private
       def load_path path
-        @ini_sections = []
-        @ini_file     = IniFile.load path
-        @ini_file.each_section do |section|
-          @ini_sections << @ini_file[section]
+        @ini_file = IniFile.load path
+        @ini_file.to_h.values.each_with_index.map do |x, i|
+          hash = { :id => i + 1 }
+          x.each { |k, v| hash[k.to_sym] = v }
+          hash
         end
-        @ini_sections
       end
 
     end
